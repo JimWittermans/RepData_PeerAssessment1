@@ -10,6 +10,25 @@ output:
 
 
 
+```{r}
+## Step 0a: Define general variables like working directory. You can change this to something that suits you to test the script!
+workingdir            <- "C:/Users/Jim Wittermans/Documents/GitHub/RepData_PeerAssessment1/activity/" ## Emptied for my own privacy ;-)
+file_name             <- "activity.csv"
+saturday              <- "zaterdag"         # Change this to your own language; warning: case sensitive!
+sunday                <- "sunday"           # Change this to your own language; warning: case sensitive!
+
+## Step 0b: Set global variables / load libraries
+setwd(workingdir)
+library(lattice)
+
+######################################################################################### --- PART 1 --- #########################################################
+## Step 1: Read and prepare the CSV as defined in step 1 
+rep_dataset            <- read.csv(file_name, head=TRUE, colClasses=c("integer", "character", "integer"), na.strings="NA")
+rep_dataset$date       <- as.Date(rep_dataset$date)
+rep_dataset_prepared   <- subset(rep_dataset, !is.na(rep_dataset$steps))
+```{r}
+
+
 ## What is mean total number of steps taken per day?
 
 
