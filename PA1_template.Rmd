@@ -8,6 +8,7 @@ output:
 
 ## Loading and preprocessing the data
 
+# First we need to preprocess the data and set some variables like the name of the day of the week (which is different based on language, but used later on)
 
 
 ```{r}
@@ -31,6 +32,24 @@ rep_dataset_prepared   <- subset(rep_dataset, !is.na(rep_dataset$steps))
 
 ## What is mean total number of steps taken per day?
 
+```{r}
+## Step 2: Get the sum per day, using tapply, but only with filled values.
+steps_per_day          <- tapply(rep_dataset_prepared$steps, rep_dataset_prepared$date, sum, na.rm=TRUE, simplify=T)
+steps_per_day          <- steps_per_day[!is.na(steps_per_day)]
+
+## Step 3: Generate Histogram (Breaks = Length(steps_per_day) indicates how many different bars have to appear, based on the amount of different records)
+hist(x=steps_per_day,
+     ylab="Frequency",
+     xlab="Total Steps per Day",
+     main="Frequency of steps per day",     
+     col="lightblue",
+     border=0,
+     breaks=length(steps_per_day))
+
+## Step 4: Report the mean and median
+mean(steps_per_day)
+median(steps_per_day)
+```
 
 
 ## What is the average daily activity pattern?
