@@ -9,9 +9,9 @@ output:
 ## Loading and preprocessing the data
 
 First we need to preprocess the data and set some variables like the name of the day of the week (which is different based on language, but used later on)
-Step 0a: Define general variables like working directory. You can change this to something that suits you to test the script!
-Step 0b: Set global variables / load libraries
-Step 0c: Read and prepare the CSV as defined in step 1 
+* Step 0a: Define general variables like working directory. You can change this to something that suits you to test the script!
+* Step 0b: Set global variables / load libraries
+* Step 0c: Read and prepare the CSV as defined in step 1 
 
 
 ```{r}
@@ -33,9 +33,9 @@ rep_dataset_prepared   <- subset(rep_dataset, !is.na(rep_dataset$steps))
 
 
 ## What is mean total number of steps taken per day?
-Step 1: Get the sum per day, using tapply, but only with filled values.
-Step 2: Generate Histogram (Breaks = Length(steps_per_day) indicates how many different bars have to appear, based on the amount of different records)
-Step 3: Report the mean and median
+* Step 1: Get the sum per day, using tapply, but only with filled values.
+* Step 2: Generate Histogram (Breaks = Length(steps_per_day) indicates how many different bars have to appear, based on the amount of different records)
+* Step 3: Report the mean and median
 
 
 ```{r}
@@ -59,9 +59,9 @@ median(steps_per_day)
 
 
 ## What is the average daily activity pattern?
-Step 1: Use tapply to get the mean per interval, as defined per 5 minutes in the dataset
-Step 2: Generate the histogram with the previously generated dataframe.
-Step 3: Get the max steps per interval
+* Step 1: Use tapply to get the mean per interval, as defined per 5 minutes in the dataset
+* Step 2: Generate the histogram with the previously generated dataframe.
+* Step 3: Get the max steps per interval
 
 
 ```{r}
@@ -88,11 +88,11 @@ steps_mean_dataframe[steps_mean_dataframe$avg == max_steps,]
 ```
 
 ## Imputing missing values
-Step 1: Report the number of missing values
-Step 2: Handle the missing values and fill them in. We use the mean of the last interval to fill in the blanks
-Step 3: Create new dataset based on the filled missing values
-Step 4: Generate new histogram based on the filled missing values, used the same code for part 1.
-Step 5: Report the mean and median
+* Step 1: Report the number of missing values
+* Step 2: Handle the missing values and fill them in. We use the mean of the last interval to fill in the blanks
+* Step 3: Create new dataset based on the filled missing values
+* Step 4: Generate new histogram based on the filled missing values, used the same code for part 1.
+* Step 5: Report the mean and median
 
 
 ```{r}
@@ -127,11 +127,11 @@ median(new_steps_per_day)
 ## Are there differences in activity patterns between weekdays and weekends?
 
 Pattern differences between weekdays and weekends, seperate steps: 
-Step 1: Function to see whether the day is a weekend day or a weekday, using the weekdays function.
-Step 2: Get the weekday column based on the previously defined function. Don't forget to define the names of the weekdays in step 0. 
-Step 3: Then add the column to the already existing dataset
-Step 4: Aggregate the data, preparing for making the new plot
-Step 5: Actually creating the new plot
+* Step 1: Function to see whether the day is a weekend day or a weekday, using the weekdays function.
+* Step 2: Get the weekday column based on the previously defined function. Don't forget to define the names of the weekdays in step 0. 
+* Step 3: Then add the column to the already existing dataset
+* Step 4: Aggregate the data, preparing for making the new plot
+* Step 5: Actually creating the new plot
 
 ```{r}
 # Step 1: Function to see whether the day is a weekend day or a weekday, using the weekdays function.
