@@ -8,7 +8,7 @@ output:
 
 ## Loading and preprocessing the data
 
-# First we need to preprocess the data and set some variables like the name of the day of the week (which is different based on language, but used later on)
+First we need to preprocess the data and set some variables like the name of the day of the week (which is different based on language, but used later on)
 
 
 ```{r}
@@ -54,7 +54,27 @@ median(steps_per_day)
 
 ## What is the average daily activity pattern?
 
+```{r}
+## Step 1: Use tapply to get the mean per interval, as defined per 5 minutes in the dataset
+steps_mean             <- tapply(rep_dataset_prepared$steps, rep_dataset_prepared$interval, mean, na.rm=TRUE, simplify=T)
+steps_mean_dataframe   <- data.frame(interval=as.integer(names(steps_mean)), avg=steps_mean)
 
+## Step 2: Generate the histogram with the previously generated dataframe.
+with(steps_mean_dataframe,
+     plot(interval,
+          avg,
+          type="l",
+          xlab="5-minute intervals",
+          ylab="average steps in the interval across all days",
+          main="Daily average activity pattern",
+          col="darkblue",
+          lwd="2"
+          )
+         )
+
+max_steps              <- max(steps_mean_dataframe$avg)
+steps_mean_dataframe[steps_mean_dataframe$avg == max_steps,]
+```
 
 ## Imputing missing values
 
