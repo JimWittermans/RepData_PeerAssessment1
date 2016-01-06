@@ -16,10 +16,10 @@ First we need to preprocess the data and set some variables like the name of the
 
 ```{r}
 ## Step 0a: Define general variables like working directory. You can change this to something that suits you to test the script!
-workingdir            <- "C:/Users/Jim Wittermans/Documents/GitHub/RepData_PeerAssessment1/activity/" ## Emptied for my own privacy ;-)
+workingdir            <- "" ## Emptied for my own privacy ;-)
 file_name             <- "activity.csv"
 saturday              <- "zaterdag"         # Change this to your own language; warning: case sensitive!
-sunday                <- "sunday"           # Change this to your own language; warning: case sensitive!
+sunday                <- "zondag"           # Change this to your own language; warning: case sensitive!
 
 ## Step 0b: Set global variables / load libraries
 setwd(workingdir)
