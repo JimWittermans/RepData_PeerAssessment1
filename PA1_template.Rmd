@@ -26,7 +26,7 @@ library(lattice)
 rep_dataset            <- read.csv(file_name, head=TRUE, colClasses=c("integer", "character", "integer"), na.strings="NA")
 rep_dataset$date       <- as.Date(rep_dataset$date)
 rep_dataset_prepared   <- subset(rep_dataset, !is.na(rep_dataset$steps))
-```{r}
+```
 
 
 ## What is mean total number of steps taken per day?
