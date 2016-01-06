@@ -77,7 +77,59 @@ steps_mean_dataframe[steps_mean_dataframe$avg == max_steps,]
 ```
 
 ## Imputing missing values
+```{r}
+## Step 1: Report the number of missing values
+sum(is.na(rep_dataset$steps))
 
+
+## Step 2: Handle the missing values and fill them in. We use the mean of the last interval to fill in the blanks
+rep_dataset_copy        <- rep_dataset
+dataframe_missing_values<- is.na(rep_dataset_copy$steps)
+retrieve_average        <- tapply(rep_dataset_prepared$steps, rep_dataset_prepared$interval, mean, na.rm=TRUE, simplify=T)
+rep_dataset_copy$steps[dataframe_missing_values]    <- retrieve_average[as.character(rep_dataset_copy$interval[dataframe_missing_values])]
+
+## Step 3: Create new dataset based on the filled missing values
+new_steps_per_day       <- tapply(rep_dataset_copy$steps, rep_dataset_copy$date, sum, na.rm=TRUE, simplify=T)
+
+## Step 4: Generate new histogram based on the filled missing values, used the same code for part 1.
+hist(x=new_steps_per_day,
+     ylab="Frequency",
+     xlab="Total Steps per Day",
+     main="Frequency of steps per day (with filled missing values)",     
+     col="lightblue",
+     border=0,
+     breaks=length(new_steps_per_day))
+
+## Step 5: Report the mean and median
+mean(new_steps_per_day)
+median(new_steps_per_day)
+```
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
+```{r}
+# Step 1: Function to see whether the day is a weekend day or a weekday, using the weekdays function.
+## (CREDITS: Github User from Previous Course, EDITED BY Jim Wittermans for language differences)
+is_weekday <- function(d) {
+  wd <- weekdays(d)
+  ifelse (wd == saturday | wd == sunday, "weekend", "weekday")
+}
+
+rep_dataset_copy$date       <- as.Date(rep_dataset_copy$date)
+generate_weekday_column     <- sapply(rep_dataset_copy$date, is_weekday)
+rep_dataset_copy$wk         <- as.factor(generate_weekday_column)
+
+
+grouped_steps_per_interval  <- aggregate(steps ~ wk+interval, data=rep_dataset_copy, FUN=mean)
+
+
+xyplot(steps ~ interval | factor(wk),
+       layout = c(1, 2),
+       xlab="5-minute interval",
+       ylab="Step count",
+       main="Frequency of steps per day weekday/weekend",     
+       type="l",
+       lty=1,
+       lwd="2",
+       data=grouped_steps_per_interval)
+```       
